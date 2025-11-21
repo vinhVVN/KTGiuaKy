@@ -23,10 +23,10 @@
             <c:forEach items="${categories}" var="cate">
                 <tr>
                     <td>${cate.categoryId}</td>
-                    <td>${cate.catename}</td>
+                    <td>${cate.categoryName}</td>
                     <td>
-                        <c:if test="${not empty cate.icon}">
-                            <img src="<c:url value='/upload/category/${cate.icon}'/>" width="50" height="50" style="object-fit: cover">
+                        <c:if test="${not empty cate.images}">
+                            <img src="<c:url value='/upload/category/${cate.images}'/>" width="50" height="50" style="object-fit: cover">
                         </c:if>
                     </td>
                     <td>

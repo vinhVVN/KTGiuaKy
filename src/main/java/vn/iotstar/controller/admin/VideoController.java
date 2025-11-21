@@ -19,8 +19,21 @@ public class VideoController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Video> list = videoService.findAll();
+    	String keyword = req.getParameter("keyword");
+        List<Video> list;
+        
+    	
+        if (keyword != null && !keyword.trim().isEmpty()) {
+            // Gọi hàm tìm kiếm đã có trong Service
+            list = videoService.findByTitle(keyword);
+        } else {
+            // Nếu không tìm kiếm thì lấy tất cả
+            list = videoService.findAll();
+            keyword = ""; // Reset để tránh null khi hiển thị lại view
+        }
+        
         req.setAttribute("videos", list);
+        req.setAttribute("keyword", keyword);
         req.getRequestDispatcher("/views/admin/list-video.jsp").forward(req, resp);
     }
 }

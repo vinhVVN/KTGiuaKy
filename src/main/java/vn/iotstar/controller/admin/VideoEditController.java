@@ -65,6 +65,9 @@ public class VideoEditController extends HttpServlet {
                 filePart.write(uploadPath.resolve(fileName).toString());
                 video.setPoster(fileName);
             }
+            else {
+            	video.setPoster(videoService.findById(id).getPoster());
+            }
             
             videoService.update(video);
             resp.sendRedirect(req.getContextPath() + "/admin/video/list");

@@ -22,10 +22,8 @@ public class VideoDeleteController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String id = req.getParameter("id");
         try {
-            // 1. Lấy thông tin sản phẩm để biết đường dẫn ảnh
             Video video = videoService.findById(id);
             
-            // 2. Xóa file ảnh trên server
             if (video.getPoster() != null && !video.getPoster().isEmpty()) {
                 String appPath = req.getServletContext().getRealPath("");
                 java.nio.file.Path uploadPath = java.nio.file.Paths.get(appPath, "upload", "video", video.getPoster());
@@ -34,8 +32,6 @@ public class VideoDeleteController extends HttpServlet{
                     java.nio.file.Files.delete(uploadPath);
                 }
             }
-            
-            // 3. Xóa sản phẩm khỏi CSDL
             videoService.delete(id);
             
             resp.sendRedirect(req.getContextPath() + "/admin/video/list");

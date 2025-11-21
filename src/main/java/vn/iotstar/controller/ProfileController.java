@@ -57,19 +57,17 @@ public class ProfileController extends HttpServlet {
      }
 
      try {
-         // Lấy lại user từ DB để đảm bảo update trên object đầy đủ thông tin
          User userToUpdate = userService.get(sessionUser.getUsername());
 
-         // Nhận dữ liệu từ form
          String fullname = req.getParameter("fullname");
          String phone = req.getParameter("phone");
-         String email = req.getParameter("email"); // Thường email/username không cho sửa, tùy logic
+         String email = req.getParameter("email"); 
 
          userToUpdate.setFullname(fullname);
          userToUpdate.setPhone(phone);
          userToUpdate.setEmail(email);
 
-         // Xử lý upload ảnh đại diện (Avatar)
+         // Xử lý upload ảnh đại diện 
          Part filePart = req.getPart("images");
          if (filePart != null && filePart.getSize() > 0) {
              String fileName = System.currentTimeMillis() + "_" + filePart.getSubmittedFileName();
@@ -84,13 +82,10 @@ public class ProfileController extends HttpServlet {
              userToUpdate.setImages(fileName);
          }
 
-         // Gọi service update
          userService.update(userToUpdate);
 
          // Cập nhật lại session để hiển thị đúng ở các trang khác ngay lập tức
          session.setAttribute("account", userToUpdate);
-
-         // Thông báo thành công
          req.setAttribute("message", "Cập nhật thông tin thành công!");
          req.setAttribute("user", userToUpdate);
          

@@ -47,10 +47,8 @@ public class CategoryAddController extends HttpServlet{
 			Part filePart = req.getPart("icon");
 			
 			if (filePart != null && filePart.getSize() > 0) {
-                // Có file mới được upload
                 String originalFileName = filePart.getSubmittedFileName();
-                
-                // Tạo tên file duy nhất
+             
                 String ext = originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
                 String fileName = System.currentTimeMillis() + "." + ext;
 

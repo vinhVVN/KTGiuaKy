@@ -29,17 +29,15 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public boolean register(String email, String password, String username, String fullname, String phone) {
 
-        // Tạo User mới khớp với Entity User.java đã có
         User user = new User();
         user.setUsername(username);
-        user.setPassword(password); // Lưu ý: Thực tế nên mã hóa password (BCrypt)
+        user.setPassword(password); 
         user.setEmail(email);
         user.setFullname(fullname);
         user.setPhone(phone);
-        user.setAdmin(true); // Mặc định role user là 2 (hoặc 1 tùy quy định DB)
+        user.setAdmin(false); 
         user.setActive(true);
         user.setImages(null);
-        // Do User Entity của bạn không có cột Date hay Images, ta không set các trường đó
         
         userDAO.insert(user);
         return true;
