@@ -4,30 +4,30 @@ import java.util.List;
 
 import vn.iotstar.dao.VideoDAO_23110172;
 import vn.iotstar.dao.impl.VideoDAOImpl_23110172;
-import vn.iotstar.entity.Video_23110172;
+import vn.iotstar.entity.Video;
 import vn.iotstar.service.VideoService_23110172;
 
 public class VideoServiceImpl_23110172 implements VideoService_23110172{
 	VideoDAO_23110172 videoDao = new VideoDAOImpl_23110172();
 
 	@Override
-	public List<Video_23110172> findAll() {
+	public List<Video> findAll() {
 		return videoDao.findAll();
 	}
 
 	@Override
-	public Video_23110172 findById(String id) {
+	public Video findById(String id) {
 		return videoDao.findById(id);
 	}
 
 	@Override
-	public void insert(Video_23110172 video) {
+	public void insert(Video video) {
 		videoDao.insert(video);
 		
 	}
 
 	@Override
-	public void update(Video_23110172 video) {
+	public void update(Video video) {
 		videoDao.update(video);
 		
 	}
@@ -43,12 +43,12 @@ public class VideoServiceImpl_23110172 implements VideoService_23110172{
 	}
 
 	@Override
-	public List<Video_23110172> findByTitle(String keyword) {
+	public List<Video> findByTitle(String keyword) {
 		return videoDao.findByTitle(keyword);
 	}
 
 	@Override
-	public List<Video_23110172> findAll(int page, int pageSize) {
+	public List<Video> findAll(int page, int pageSize) {
 		return videoDao.findAll(page, pageSize);
 	}
 
@@ -58,7 +58,7 @@ public class VideoServiceImpl_23110172 implements VideoService_23110172{
 	}
 
 	@Override
-	public List<Video_23110172> findByCategoryId(int cateId) {
+	public List<Video> findByCategoryId(int cateId) {
 		return videoDao.findByCategoryId(cateId);
 	}
 	

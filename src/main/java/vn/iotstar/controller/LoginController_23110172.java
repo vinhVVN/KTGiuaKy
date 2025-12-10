@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import vn.iotstar.entity.User_23110172;
+import vn.iotstar.entity.User;
 import vn.iotstar.service.UserService_23110172;
 import vn.iotstar.service.impl.UserServiceImpl_23110172;
 
@@ -62,7 +62,7 @@ public class LoginController_23110172 extends HttpServlet{
 			 return;
 		}
 		UserService_23110172 service = new UserServiceImpl_23110172();
-		User_23110172 user = service.login(username, password);
+		User user = service.login(username, password);
 		if(user!=null){
 			 HttpSession session = req.getSession(true);
 			 session.setAttribute("account", user);

@@ -8,28 +8,28 @@ import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import vn.iotstar.configs.JPAConfig;
 import vn.iotstar.dao.VideoDAO_23110172;
-import vn.iotstar.entity.Video_23110172;
+import vn.iotstar.entity.Video;
 
 public class VideoDAOImpl_23110172 implements VideoDAO_23110172{
 	
 	
 	
 	@Override
-	public List<Video_23110172> findAll() {
+	public List<Video> findAll() {
 		EntityManager entityManager = JPAConfig.getEnityManager();
 		String jpql = "SELECT v FROM Video v";
-        TypedQuery<Video_23110172> query = entityManager.createQuery(jpql, Video_23110172.class);
+        TypedQuery<Video> query = entityManager.createQuery(jpql, Video.class);
         return query.getResultList();
 	}
 
 	@Override
-	public Video_23110172 findById(String id) {
+	public Video findById(String id) {
 		EntityManager entityManager = JPAConfig.getEnityManager();
-		return entityManager.find(Video_23110172.class, id);
+		return entityManager.find(Video.class, id);
 	}
 
 	@Override
-	public void insert(Video_23110172 video) {
+	public void insert(Video video) {
 		EntityManager enma = JPAConfig.getEnityManager();
 		EntityTransaction trans = enma.getTransaction();
 		try {
@@ -46,7 +46,7 @@ public class VideoDAOImpl_23110172 implements VideoDAO_23110172{
 	}
 
 	@Override
-	public void update(Video_23110172 video) {
+	public void update(Video video) {
 		EntityManager enma = JPAConfig.getEnityManager();
 		EntityTransaction trans = enma.getTransaction();
 		try {
@@ -65,7 +65,7 @@ public class VideoDAOImpl_23110172 implements VideoDAO_23110172{
 	@Override
 	public void delete(String id) throws Exception {
 		EntityManager entityManager = JPAConfig.getEnityManager();
-		Video_23110172 video = findById(id);
+		Video video = findById(id);
         if (video != null) {
             entityManager.remove(video);
         } else {
@@ -75,18 +75,18 @@ public class VideoDAOImpl_23110172 implements VideoDAO_23110172{
 	}
 
 	@Override
-	public List<Video_23110172> findByTitle(String keyword) {
+	public List<Video> findByTitle(String keyword) {
 		EntityManager entityManager = JPAConfig.getEnityManager();
 		String jpql = "SELECT v FROM Video v WHERE v.title LIKE :keyword";
-        TypedQuery<Video_23110172> query = entityManager.createQuery(jpql, Video_23110172.class);
+        TypedQuery<Video> query = entityManager.createQuery(jpql, Video.class);
         query.setParameter("keyword", "%" + keyword + "%");
         return query.getResultList();
 	}
 
 	@Override
-	public List<Video_23110172> findAll(int page, int pageSize) {
+	public List<Video> findAll(int page, int pageSize) {
 		EntityManager enma = JPAConfig.getEnityManager();
-	    TypedQuery<Video_23110172> query = enma.createQuery("SELECT v FROM Video v", Video_23110172.class);
+	    TypedQuery<Video> query = enma.createQuery("SELECT v FROM Video v", Video.class);
 	    query.setFirstResult((page - 1) * pageSize);
 	    query.setMaxResults(pageSize);
 	    return query.getResultList();
@@ -101,16 +101,16 @@ public class VideoDAOImpl_23110172 implements VideoDAO_23110172{
 	}
 
 	@Override
-	public List<Video_23110172> findByCategoryId(int cateId) {
+	public List<Video> findByCategoryId(int cateId) {
 		EntityManager enma = JPAConfig.getEnityManager();
 	    try {
 	        String jpql = "SELECT v FROM Video v WHERE v.category.categoryId = :cateId";
-	        TypedQuery<Video_23110172> query = enma.createQuery(jpql, Video_23110172.class);
+	        TypedQuery<Video> query = enma.createQuery(jpql, Video.class);
 	        query.setParameter("cateId", cateId);
-	        List<Video_23110172> list = query.getResultList();
+	        List<Video> list = query.getResultList();
 	        
 	        // --- ĐOẠN CODE FIX LỖI LAZY ---
-	        for (Video_23110172 v : list) {
+	        for (Video v : list) {
 	            // Ép tải danh sách Share và Favorite
 	            v.getShares().size();
 	            v.getFavorites().size();

@@ -8,7 +8,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import vn.iotstar.entity.Video_23110172;
+import vn.iotstar.entity.Video;
 import vn.iotstar.service.VideoService_23110172;
 import vn.iotstar.service.impl.VideoServiceImpl_23110172;
 
@@ -21,17 +21,17 @@ public class HomeController_23110172 extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // Lấy danh sách tất cả video
-        List<Video_23110172> videos = videoService.findAll();
+        List<Video> videos = videoService.findAll();
         
         // Logic chia dữ liệu cho giao diện đẹp
         if (videos != null && !videos.isEmpty()) {
             // Lấy video đầu tiên làm Banner (Phim nổi bật)
-            Video_23110172 featuredVideo = videos.get(0);
+            Video featuredVideo = videos.get(0);
             req.setAttribute("featuredVideo", featuredVideo);
             
             // Danh sách còn lại (loại bỏ video đầu tiên để không trùng)
             if (videos.size() > 1) {
-                List<Video_23110172> listVideo = videos.subList(1, videos.size());
+                List<Video> listVideo = videos.subList(1, videos.size());
                 req.setAttribute("listVideo", listVideo);
             }
         }

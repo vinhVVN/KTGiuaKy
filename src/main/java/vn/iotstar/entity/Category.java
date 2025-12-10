@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @Table(name = "categories") 
-public class Category_23110172 implements Serializable {
+public class Category implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -47,11 +47,11 @@ public class Category_23110172 implements Serializable {
     // Quan hệ N-1: Nhiều Category thuộc về 1 User
     @ManyToOne
     @JoinColumn(name = "username") // Tên cột khóa ngoại trong DB
-    private User_23110172 user;
+    private User user;
 
     // Quan hệ 1-N: Category chứa nhiều Video
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Video_23110172> videos;
+    private List<Video> videos;
 	
     
     

@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Builder
 @Table(name = "users")
-public class User_23110172 implements Serializable{
+public class User implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
@@ -55,14 +55,14 @@ public class User_23110172 implements Serializable{
     
     // Quan hệ 1-N: User quản lý nhiều Category (nếu logic đề bài yêu cầu User tạo Category)
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Category_23110172> categories;
+    private List<Category> categories;
     
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Favorite_23110172> favorites;
+    private List<Favorite> favorites;
 
     // Quan hệ 1-N: User có nhiều lượt Share
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Share_23110172> shares;
+    private List<Share> shares;
 	
 	
 

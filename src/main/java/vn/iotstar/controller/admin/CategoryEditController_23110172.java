@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
-import vn.iotstar.entity.Category_23110172;
+import vn.iotstar.entity.Category;
 import vn.iotstar.service.CategoryService_23110172;
 import vn.iotstar.service.impl.CategoryServiceImpl_23110172;
 
@@ -28,7 +28,7 @@ public class CategoryEditController_23110172 extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// Lấy ID từ URL
         String id = req.getParameter("id");
-        Category_23110172 category = cateService.findById(Integer.parseInt(id));
+        Category category = cateService.findById(Integer.parseInt(id));
         
         req.setAttribute("category", category);
         RequestDispatcher dispatcher = req.getRequestDispatcher("/views/admin/edit-category.jsp");
@@ -47,7 +47,7 @@ public class CategoryEditController_23110172 extends HttpServlet {
             String name = req.getParameter("catename");
             
             // Lấy category cũ để giữ lại ảnh nếu không up ảnh mới
-            Category_23110172 category = cateService.findById(id);
+            Category category = cateService.findById(id);
             category.setCategoryName(name);
 
             Part filePart = req.getPart("icon");

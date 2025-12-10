@@ -1,21 +1,21 @@
 package vn.iotstar.service;
 
-import vn.iotstar.entity.User_23110172;
+import vn.iotstar.entity.User;
 
 public interface UserService_23110172 {
-	User_23110172 login(String username, String password);
-	User_23110172 get(String username);
+	User login(String username, String password);
+	User get(String username);
 	
 	
-	void insert(User_23110172 user);
+	void insert(User user);
 	boolean register(String email, String password, String username, String fullname,
 			String phone);
 	boolean checkExistEmail(String email);
 	boolean checkExistUsername(String username);
 	
-	User_23110172 findByEmail(String email);
+	User findByEmail(String email);
 	
 	void updatePassword(int id, String newpass);
 	
-	void update(User_23110172 user);
+	void update(User user);
 }

@@ -9,27 +9,24 @@ import lombok.*;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "Shares")
-public class Share_23110172 implements Serializable {
+@Table(name = "Favorites")
+public class Favorite implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ShareId")
-    private int shareId;
+    @Column(name = "FavoriteId")
+    private int favoriteId;
 
-    @Column(name = "Emails", columnDefinition = "nvarchar(500)")
-    private String emails;
-
-    @Column(name = "SharedDate")
+    @Column(name = "LikedDate")
     @Temporal(TemporalType.DATE)
-    private Date sharedDate;
+    private Date likedDate;
 
     @ManyToOne
-    @JoinColumn(name = "Username")
-    private User_23110172 user;
+    @JoinColumn(name = "Username") 
+    private User user;
 
     @ManyToOne
     @JoinColumn(name = "VideoId")
-    private Video_23110172 video;
+    private Video video;
 }

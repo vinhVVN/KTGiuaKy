@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
-import vn.iotstar.entity.User_23110172;
+import vn.iotstar.entity.User;
 import vn.iotstar.service.UserService_23110172;
 import vn.iotstar.service.impl.UserServiceImpl_23110172;
 
@@ -27,7 +27,7 @@ public class ProfileController_23110172 extends HttpServlet {
  protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
      // 1. Lấy User hiện tại từ Session
      HttpSession session = req.getSession();
-     User_23110172 user = (User_23110172) session.getAttribute("account");
+     User user = (User) session.getAttribute("account");
 
      // Nếu chưa đăng nhập thì đá về trang login
      if (user == null) {
@@ -36,7 +36,7 @@ public class ProfileController_23110172 extends HttpServlet {
      }
 
      // 2. Đảm bảo dữ liệu mới nhất từ DB (phòng trường hợp session cũ)
-     User_23110172 currentUser = userService.get(user.getUsername());
+     User currentUser = userService.get(user.getUsername());
      
      req.setAttribute("user", currentUser);
      RequestDispatcher dispatcher = req.getRequestDispatcher("/views/web/profile.jsp"); // Dùng chung view
@@ -49,7 +49,7 @@ public class ProfileController_23110172 extends HttpServlet {
      resp.setCharacterEncoding("UTF-8");
 
      HttpSession session = req.getSession();
-     User_23110172 sessionUser = (User_23110172) session.getAttribute("account");
+     User sessionUser = (User) session.getAttribute("account");
 
      if (sessionUser == null) {
          resp.sendRedirect(req.getContextPath() + "/login");
@@ -57,7 +57,7 @@ public class ProfileController_23110172 extends HttpServlet {
      }
 
      try {
-         User_23110172 userToUpdate = userService.get(sessionUser.getUsername());
+         User userToUpdate = userService.get(sessionUser.getUsername());
 
          String fullname = req.getParameter("fullname");
          String phone = req.getParameter("phone");

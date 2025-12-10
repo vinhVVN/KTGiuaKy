@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Builder
 @Table(name = "videos")
-public class Video_23110172 implements Serializable{
+public class Video implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -47,14 +47,14 @@ public class Video_23110172 implements Serializable{
 
     @ManyToOne
     @JoinColumn(name = "CategoryId")
-    private Category_23110172 category;
+    private Category category;
 
     // Quan hệ 1-N: Video có nhiều lượt Like
     @OneToMany(mappedBy = "video", cascade = CascadeType.ALL)
-    private List<Favorite_23110172> favorites;
+    private List<Favorite> favorites;
 
     // Quan hệ 1-N: Video có nhiều lượt Share
     @OneToMany(mappedBy = "video", cascade = CascadeType.ALL)
-    private List<Share_23110172> shares;
+    private List<Share> shares;
 
 }

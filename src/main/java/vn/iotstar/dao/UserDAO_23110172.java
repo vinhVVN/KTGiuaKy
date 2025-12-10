@@ -1,16 +1,16 @@
 package vn.iotstar.dao;
 
-import vn.iotstar.entity.User_23110172;
+import vn.iotstar.entity.User;
 
 public interface UserDAO_23110172 {
-	public User_23110172 get(String username);
+	public User get(String username);
 	
-	void insert(User_23110172 user);
+	void insert(User user);
 	boolean checkExistEmail(String email);
 	boolean checkExistUsername(String username);
-	User_23110172 findByEmail(String email);
+	User findByEmail(String email);
 	
 	void updatePassword(int id, String newpass);
 	
-	void update(User_23110172 user);
+	void update(User user);
 }

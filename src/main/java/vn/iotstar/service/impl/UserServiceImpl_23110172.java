@@ -2,14 +2,14 @@ package vn.iotstar.service.impl;
 
 import vn.iotstar.dao.UserDAO_23110172;
 import vn.iotstar.dao.impl.UserDAOImpl_23110172;
-import vn.iotstar.entity.User_23110172;
+import vn.iotstar.entity.User;
 import vn.iotstar.service.UserService_23110172;
 
 public class UserServiceImpl_23110172 implements UserService_23110172 {
 	UserDAO_23110172 userDAO = new UserDAOImpl_23110172();
 	@Override
-	public User_23110172 login(String username, String password) {
-		User_23110172 user = this.get(username);
+	public User login(String username, String password) {
+		User user = this.get(username);
 		if (user != null && password.equals(user.getPassword())) {
 			return user;
 		}
@@ -17,19 +17,19 @@ public class UserServiceImpl_23110172 implements UserService_23110172 {
 	}
 
 	@Override
-	public User_23110172 get(String username) {
+	public User get(String username) {
 		return userDAO.get(username);
 	}
 
 	@Override
-	public void insert(User_23110172 user) {
+	public void insert(User user) {
 		userDAO.insert(user);
 	}
 
 	@Override
 	public boolean register(String email, String password, String username, String fullname, String phone) {
 
-        User_23110172 user = new User_23110172();
+        User user = new User();
         user.setUsername(username);
         user.setPassword(password); 
         user.setEmail(email);
@@ -56,7 +56,7 @@ public class UserServiceImpl_23110172 implements UserService_23110172 {
 
 
 	@Override
-	public User_23110172 findByEmail(String email) {
+	public User findByEmail(String email) {
 		return userDAO.findByEmail(email);
 	}
 
@@ -67,7 +67,7 @@ public class UserServiceImpl_23110172 implements UserService_23110172 {
 	}
 
 	@Override
-	public void update(User_23110172 user) {
+	public void update(User user) {
 		userDAO.update(user);
 		
 	}

@@ -10,7 +10,7 @@ import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
 import vn.iotstar.configs.JPAConfig;
 import vn.iotstar.dao.UserDAO_23110172;
-import vn.iotstar.entity.User_23110172;
+import vn.iotstar.entity.User;
 
 public class UserDAOImpl_23110172 implements UserDAO_23110172{
 	public Connection conn = null;
@@ -20,7 +20,7 @@ public class UserDAOImpl_23110172 implements UserDAO_23110172{
 	
 
 	@Override
-	public void insert(User_23110172 user) {
+	public void insert(User user) {
 		EntityManager em = JPAConfig.getEnityManager();
 		EntityTransaction trans = em.getTransaction();
 		try {
@@ -40,7 +40,7 @@ public class UserDAOImpl_23110172 implements UserDAO_23110172{
 	public boolean checkExistEmail(String email) {
 		EntityManager em = JPAConfig.getEnityManager();
 		try {
-			List<User_23110172> users = em.createQuery("SELECT u FROM User u WHERE u.email = :email", User_23110172.class)
+			List<User> users = em.createQuery("SELECT u FROM User u WHERE u.email = :email", User.class)
 									.setParameter("email", email)
 									.getResultList();
 			return !users.isEmpty();
@@ -53,7 +53,7 @@ public class UserDAOImpl_23110172 implements UserDAO_23110172{
 	public boolean checkExistUsername(String username) {
 		EntityManager em = JPAConfig.getEnityManager();
 		try {
-			List<User_23110172> users = em.createQuery("SELECT u FROM User u WHERE u.username = :username", User_23110172.class)
+			List<User> users = em.createQuery("SELECT u FROM User u WHERE u.username = :username", User.class)
 									.setParameter("username", username)
 									.getResultList();
 			return !users.isEmpty();
@@ -64,9 +64,9 @@ public class UserDAOImpl_23110172 implements UserDAO_23110172{
 
 
 	@Override
-	public User_23110172 findByEmail(String email) {
+	public User findByEmail(String email) {
 		EntityManager em = JPAConfig.getEnityManager();
-		return em.find(User_23110172.class, email);
+		return em.find(User.class, email);
 	}
 
 	@Override
@@ -94,16 +94,16 @@ public class UserDAOImpl_23110172 implements UserDAO_23110172{
 	}
 
 	@Override
-	public User_23110172 get(String username) {
+	public User get(String username) {
 		EntityManager em = JPAConfig.getEnityManager();
-		TypedQuery<User_23110172> q = em.createQuery("SELECT u FROM User u WHERE u.username = :username", User_23110172.class);
+		TypedQuery<User> q = em.createQuery("SELECT u FROM User u WHERE u.username = :username", User.class);
 		q.setParameter("username", username);
 		return q.getResultStream().findFirst().orElse(null);
 		
 	}
 
 	@Override
-	public void update(User_23110172 user) {
+	public void update(User user) {
 		EntityManager enma = JPAConfig.getEnityManager();
 		EntityTransaction trans = enma.getTransaction();
 		try {

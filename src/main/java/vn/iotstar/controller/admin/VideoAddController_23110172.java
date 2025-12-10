@@ -11,8 +11,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
-import vn.iotstar.entity.Category_23110172;
-import vn.iotstar.entity.Video_23110172;
+import vn.iotstar.entity.Category;
+import vn.iotstar.entity.Video;
 import vn.iotstar.service.CategoryService_23110172;
 import vn.iotstar.service.VideoService_23110172;
 import vn.iotstar.service.impl.CategoryServiceImpl_23110172;
@@ -28,7 +28,7 @@ public class VideoAddController_23110172 extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // Load danh sách Category để hiển thị trong <select>
-        List<Category_23110172> categories = cateService.findAll();
+        List<Category> categories = cateService.findAll();
         req.setAttribute("categories", categories);
         
         req.getRequestDispatcher("/views/admin/add-video.jsp").forward(req, resp);
@@ -40,7 +40,7 @@ public class VideoAddController_23110172 extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
         
         try {
-            Video_23110172 video = new Video_23110172();
+            Video video = new Video();
             video.setVideoId(req.getParameter("videoId")); // ID dạng String
             video.setTitle(req.getParameter("title"));
             video.setDescription(req.getParameter("description"));
@@ -49,7 +49,7 @@ public class VideoAddController_23110172 extends HttpServlet {
             
             // Lấy categoryId từ dropdown và gán object Category
             int cateId = Integer.parseInt(req.getParameter("categoryId"));
-            Category_23110172 cate = new Category_23110172();
+            Category cate = new Category();
             cate.setCategoryId(cateId);
             video.setCategory(cate);
 

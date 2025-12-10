@@ -8,7 +8,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import vn.iotstar.entity.Video_23110172;
+import vn.iotstar.entity.Video;
 import vn.iotstar.service.VideoService_23110172;
 import vn.iotstar.service.impl.VideoServiceImpl_23110172;
 
@@ -34,7 +34,7 @@ public class VideoController_23110172 extends HttpServlet {
             endPage++;
         }
 
-        List<Video_23110172> list = videoService.findAll(index, pageSize);
+        List<Video> list = videoService.findAll(index, pageSize);
         
         req.setAttribute("videos", list);
         req.setAttribute("endPage", endPage);

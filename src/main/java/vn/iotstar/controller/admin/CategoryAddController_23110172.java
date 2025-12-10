@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
-import vn.iotstar.entity.Category_23110172;
+import vn.iotstar.entity.Category;
 import vn.iotstar.service.CategoryService_23110172;
 import vn.iotstar.service.impl.CategoryServiceImpl_23110172;
 import vn.iotstar.utils.Constant;
@@ -32,7 +32,7 @@ public class CategoryAddController_23110172 extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Category_23110172 category = new Category_23110172();
+		Category category = new Category();
 		resp.setContentType("text/html");
 		resp.setCharacterEncoding("UTF-8");
 		req.setCharacterEncoding("UTF-8");

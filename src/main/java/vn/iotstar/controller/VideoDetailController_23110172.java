@@ -7,7 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import vn.iotstar.entity.Video_23110172;
+import vn.iotstar.entity.Video;
 import vn.iotstar.service.VideoService_23110172;
 import vn.iotstar.service.impl.VideoServiceImpl_23110172;
 
@@ -19,7 +19,7 @@ public class VideoDetailController_23110172 extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String id = req.getParameter("id");
         if (id != null) {
-            Video_23110172 video = videoService.findById(id);
+            Video video = videoService.findById(id);
             
             // Tăng view
             video.setViews(video.getViews() + 1);

@@ -11,8 +11,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
-import vn.iotstar.entity.Video_23110172;
-import vn.iotstar.entity.Category_23110172;
+import vn.iotstar.entity.Video;
+import vn.iotstar.entity.Category;
 import vn.iotstar.service.CategoryService_23110172;
 import vn.iotstar.service.VideoService_23110172;
 import vn.iotstar.service.impl.CategoryServiceImpl_23110172;
@@ -28,8 +28,8 @@ public class VideoEditController_23110172 extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String id = req.getParameter("id");
-        Video_23110172 video = videoService.findById(id);
-        List<Category_23110172> categories = cateService.findAll();
+        Video video = videoService.findById(id);
+        List<Category> categories = cateService.findAll();
 
         req.setAttribute("video", video);
         req.setAttribute("categories", categories);
@@ -43,14 +43,14 @@ public class VideoEditController_23110172 extends HttpServlet {
         
         try {
             String id = req.getParameter("videoId");
-            Video_23110172 video = videoService.findById(id); // Lấy video cũ
+            Video video = videoService.findById(id); // Lấy video cũ
             
             video.setTitle(req.getParameter("title"));
             video.setDescription(req.getParameter("description"));
             video.setActive(req.getParameter("active") != null);
             
             int cateId = Integer.parseInt(req.getParameter("categoryId"));
-            Category_23110172 cate = new Category_23110172();
+            Category cate = new Category();
             cate.setCategoryId(cateId);
             video.setCategory(cate);
 

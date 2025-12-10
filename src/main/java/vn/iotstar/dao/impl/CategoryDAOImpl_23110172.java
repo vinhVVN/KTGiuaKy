@@ -12,13 +12,13 @@ import jakarta.persistence.TypedQuery;
 import vn.iotstar.configs.DBConnectionSQLServer;
 import vn.iotstar.configs.JPAConfig;
 import vn.iotstar.dao.CategoryDAO_23110172;
-import vn.iotstar.entity.Category_23110172;
-import vn.iotstar.entity.Video_23110172;
+import vn.iotstar.entity.Category;
+import vn.iotstar.entity.Video;
 
 public class CategoryDAOImpl_23110172 implements CategoryDAO_23110172 {
 
 	@Override
-	public void insert(Category_23110172 category) {
+	public void insert(Category category) {
 		EntityManager enma = JPAConfig.getEnityManager();
 		EntityTransaction trans = enma.getTransaction();
 		try {
@@ -34,7 +34,7 @@ public class CategoryDAOImpl_23110172 implements CategoryDAO_23110172 {
 	}
 
 	@Override
-	public void update(Category_23110172 category) {
+	public void update(Category category) {
 		EntityManager enma = JPAConfig.getEnityManager();
 		EntityTransaction trans = enma.getTransaction();
 		try {
@@ -56,7 +56,7 @@ public class CategoryDAOImpl_23110172 implements CategoryDAO_23110172 {
 		EntityTransaction trans = enma.getTransaction();
 		try {
 			trans.begin();
-			Category_23110172 category = enma.find(Category_23110172.class, id);
+			Category category = enma.find(Category.class, id);
 			if (category != null) {
 				enma.remove(category);
 			}
@@ -71,43 +71,43 @@ public class CategoryDAOImpl_23110172 implements CategoryDAO_23110172 {
 	}
 
 	@Override
-	public Category_23110172 findById(int id) {
+	public Category findById(int id) {
 		EntityManager enma = JPAConfig.getEnityManager();
-		return enma.find(Category_23110172.class, id);
+		return enma.find(Category.class, id);
 	}
 
 	@Override
-	public List<Category_23110172> findByName(String name) {
+	public List<Category> findByName(String name) {
 		EntityManager enma = JPAConfig.getEnityManager();
 		String jpql = "SELECT c FROM Category c WHERE c.categoryName LIKE :keyword";
-        TypedQuery<Category_23110172> query = enma.createQuery(jpql, Category_23110172.class);
+        TypedQuery<Category> query = enma.createQuery(jpql, Category.class);
         query.setParameter("keyword", "%" + name + "%");
         return query.getResultList();
 	}
 
 	@Override
-	public List<Category_23110172> findAll() {
+	public List<Category> findAll() {
 		EntityManager enma = JPAConfig.getEnityManager();
 		String jpql = "SELECT c FROM Category c";
-		TypedQuery<Category_23110172> query = enma.createQuery(jpql, Category_23110172.class);
+		TypedQuery<Category> query = enma.createQuery(jpql, Category.class);
 		return query.getResultList();
 	}
 
 	@Override
-	public List<Category_23110172> findAllWithVideos() {
+	public List<Category> findAllWithVideos() {
 		EntityManager enma = JPAConfig.getEnityManager();
 	    try {
 	        // Dùng LEFT JOIN FETCH để lấy Category kèm Video
 	        String jpql = "SELECT DISTINCT c FROM Category c LEFT JOIN FETCH c.videos";
-	        TypedQuery<Category_23110172> query = enma.createQuery(jpql, Category_23110172.class);
-	        List<Category_23110172> list = query.getResultList();
+	        TypedQuery<Category> query = enma.createQuery(jpql, Category.class);
+	        List<Category> list = query.getResultList();
 	        
 	        // --- ĐOẠN CODE FIX LỖI LAZY ---
 	        // Duyệt qua danh sách để kích hoạt tải dữ liệu con
-	        for (Category_23110172 cat : list) {
+	        for (Category cat : list) {
 	            // Gọi .size() để ép JPA tải danh sách Video (nếu chưa tải hết)
 	            if (cat.getVideos() != null) {
-	                for (Video_23110172 v : cat.getVideos()) {
+	                for (Video v : cat.getVideos()) {
 	                    // Ép tải danh sách Share và Favorite
 	                    v.getShares().size(); 
 	                    v.getFavorites().size();
