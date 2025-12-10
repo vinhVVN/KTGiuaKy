@@ -46,6 +46,21 @@ public class VideoServiceImpl implements VideoService{
 	public List<Video> findByTitle(String keyword) {
 		return videoDao.findByTitle(keyword);
 	}
+
+	@Override
+	public List<Video> findAll(int page, int pageSize) {
+		return videoDao.findAll(page, pageSize);
+	}
+
+	@Override
+	public int count() {
+		return videoDao.count();
+	}
+
+	@Override
+	public List<Video> findByCategoryId(int cateId) {
+		return videoDao.findByCategoryId(cateId);
+	}
 	
 	
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import vn.iotstar.configs.JPAConfig;
 import vn.iotstar.dao.VideoDAO;
@@ -80,6 +81,32 @@ public class VideoDAOImpl implements VideoDAO{
         TypedQuery<Video> query = entityManager.createQuery(jpql, Video.class);
         query.setParameter("keyword", "%" + keyword + "%");
         return query.getResultList();
+	}
+
+	@Override
+	public List<Video> findAll(int page, int pageSize) {
+		EntityManager enma = JPAConfig.getEnityManager();
+	    TypedQuery<Video> query = enma.createQuery("SELECT v FROM Video v", Video.class);
+	    query.setFirstResult((page - 1) * pageSize);
+	    query.setMaxResults(pageSize);
+	    return query.getResultList();
+	}
+
+	@Override
+	public int count() {
+		EntityManager enma = JPAConfig.getEnityManager();
+	    String jpql = "SELECT count(v) FROM Video v";
+	    Query query = enma.createQuery(jpql);
+	    return ((Long) query.getSingleResult()).intValue();
+	}
+
+	@Override
+	public List<Video> findByCategoryId(int cateId) {
+		EntityManager enma = JPAConfig.getEnityManager();
+	    String jpql = "SELECT v FROM Video v WHERE v.category.categoryId = :cateId";
+	    TypedQuery<Video> query = enma.createQuery(jpql, Video.class);
+	    query.setParameter("cateId", cateId);
+	    return query.getResultList();
 	}
 
 }

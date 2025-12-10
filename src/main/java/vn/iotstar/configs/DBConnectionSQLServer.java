@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 
 public class DBConnectionSQLServer {
 	private final String SERVERNAME = "Admin-PC\\SQLEXPRESS";
-	private final String DBNAME = "lbwebtest";
+	private final String DBNAME = "kt_giuaky";
 	private final String PORT = "1433";
 	private final String INSTANCE = "";
 	private final String USERID = "sa";

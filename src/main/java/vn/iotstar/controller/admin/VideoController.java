@@ -19,21 +19,27 @@ public class VideoController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    	String keyword = req.getParameter("keyword");
-        List<Video> list;
-        
-    	
-        if (keyword != null && !keyword.trim().isEmpty()) {
-            // Gọi hàm tìm kiếm đã có trong Service
-            list = videoService.findByTitle(keyword);
-        } else {
-            // Nếu không tìm kiếm thì lấy tất cả
-            list = videoService.findAll();
-            keyword = ""; // Reset để tránh null khi hiển thị lại view
+    	// Xử lý phân trang
+        String indexPage = req.getParameter("index");
+        int index = 1;
+        if (indexPage != null) {
+            index = Integer.parseInt(indexPage);
         }
         
+        // Đề bài yêu cầu: 6 video / 1 trang
+        int pageSize = 6; 
+        int count = videoService.count();
+        int endPage = count / pageSize;
+        if (count % pageSize != 0) {
+            endPage++;
+        }
+
+        List<Video> list = videoService.findAll(index, pageSize);
+        
         req.setAttribute("videos", list);
-        req.setAttribute("keyword", keyword);
+        req.setAttribute("endPage", endPage);
+        req.setAttribute("tag", index); // Đánh dấu trang hiện tại
+        
         req.getRequestDispatcher("/views/admin/list-video.jsp").forward(req, resp);
     }
 }

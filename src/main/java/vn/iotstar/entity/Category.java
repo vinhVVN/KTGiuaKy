@@ -53,4 +53,6 @@ public class Category implements Serializable {
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Video> videos;
 	
+    
+    
 }

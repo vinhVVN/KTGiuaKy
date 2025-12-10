@@ -1,12 +1,15 @@
 package vn.iotstar.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -42,9 +45,16 @@ public class Video implements Serializable{
     @Column(name = "active")
     private boolean active;
 
-    // Quan hệ N-1: Nhiều Video thuộc về 1 Category
     @ManyToOne
-    @JoinColumn(name = "categoryid")
+    @JoinColumn(name = "CategoryId")
     private Category category;
+
+    // Quan hệ 1-N: Video có nhiều lượt Like
+    @OneToMany(mappedBy = "video", cascade = CascadeType.ALL)
+    private List<Favorite> favorites;
+
+    // Quan hệ 1-N: Video có nhiều lượt Share
+    @OneToMany(mappedBy = "video", cascade = CascadeType.ALL)
+    private List<Share> shares;
 
 }

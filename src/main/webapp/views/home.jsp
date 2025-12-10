@@ -1,212 +1,58 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="jakarta.tags.core"%>
-<%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
 <head>
-    <title>Trang chủ - IoTStar Cinema</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-    <style>
-        /* Cấu hình màu sắc chủ đạo */
-        :root {
-            --netflix-bg: #141414;
-            --netflix-red: #e50914;
-            --netflix-hover: #181818;
-            --text-white: #ffffff;
-            --text-gray: #b3b3b3;
-        }
-
-        body {
-            background-color: var(--netflix-bg);
-            color: var(--text-white);
-            font-family: 'Roboto', sans-serif;
-            overflow-x: hidden;
-        }
-
-        /* Hero Section */
-        .hero-section {
-            position: relative;
-            height: 90vh; /* Chiều cao banner phim */
-            width: 100%;
-            background-size: cover;
-            background-position: center center;
-            display: flex;
-            align-items: center;
-            /* Header đã fixed-top nên không cần margin âm nữa, 
-               nhưng nếu bị hở trắng thì thêm top:0 */
-            top: 0; 
-            left: 0;
-        }
-        
-        /* Lớp phủ tối để chữ dễ đọc hơn */
-        .hero-overlay {
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(to top, #141414 5%, transparent 95%),
-                        linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, transparent 30%);
-            z-index: 1;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2; /* Chữ phải nổi lên trên lớp phủ */
-            padding-left: 50px;
-            padding-top: 100px; /* Đẩy chữ xuống một chút cho cân */
-            max-width: 600px;
-        }
-
-        .hero-title {
-            font-size: 3.5rem;
-            font-weight: 800;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-            margin-bottom: 1rem;
-        }
-
-        .hero-desc {
-            font-size: 1.2rem;
-            color: #e5e5e5;
-            margin-bottom: 2rem;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .btn-hero {
-            padding: 0.8rem 2rem;
-            font-size: 1.2rem;
-            border-radius: 4px;
-            font-weight: bold;
-            border: none;
-            transition: all 0.2s;
-        }
-
-        .btn-play {
-            background-color: var(--text-white);
-            color: black;
-        }
-        .btn-play:hover { background-color: rgba(255,255,255,0.75); }
-
-        .btn-info {
-            background-color: rgba(109, 109, 110, 0.7);
-            color: white;
-            margin-left: 10px;
-        }
-        .btn-info:hover { background-color: rgba(109, 109, 110, 0.4); color: white; }
-
-        /* Movie List Section */
-        .movie-section {
-            padding: 20px 5%;
-            margin-bottom: 40px;
-        }
-
-        .section-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-            color: #e5e5e5;
-            border-left: 4px solid var(--netflix-red);
-            padding-left: 10px;
-        }
-
-        /* Movie Card */
-        .movie-card {
-            position: relative;
-            border-radius: 4px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: transform 0.3s ease, z-index 0.3s;
-            background-color: #2f2f2f;
-            height: 100%;
-        }
-
-        .movie-card:hover {
-            transform: scale(1.05);
-            z-index: 10;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-        }
-
-        .movie-poster {
-            width: 100%;
-            aspect-ratio: 2/3; /* Tỉ lệ poster chuẩn */
-            object-fit: cover;
-        }
-
-        .movie-info {
-            padding: 10px;
-            background: #181818;
-        }
-
-        .movie-title {
-            font-size: 1rem;
-            font-weight: bold;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            margin-bottom: 5px;
-        }
-
-        .movie-meta {
-            font-size: 0.8rem;
-            color: var(--text-gray);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .badge-hd {
-            border: 1px solid var(--text-gray);
-            border-radius: 3px;
-            padding: 0 4px;
-            font-size: 0.7rem;
-        }
-    </style>
+    <title>Trang chủ</title>
 </head>
 
 <body>
-
     <c:if test="${not empty featuredVideo}">
-        <div class="hero-section" 
-             style="background-image: url('<c:url value='/upload/video/${featuredVideo.poster}'/>');">
-            <div class="hero-overlay"></div>
-            <div class="hero-content">
-                <h1 class="hero-title">${featuredVideo.title}</h1>
-                <p class="hero-desc">${featuredVideo.description}</p>
-                <div class="d-flex">
-                    <a href="#" class="btn btn-hero btn-play">
-                        <i class="fa-solid fa-play me-2"></i> Phát ngay
-                    </a>
-                    <a href="#" class="btn btn-hero btn-info">
-                        <i class="fa-solid fa-circle-info me-2"></i> Chi tiết
-                    </a>
+        <section class="bg-dark text-white py-5 mb-4" 
+                 style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('<c:url value='/upload/video/${featuredVideo.poster}'/>'); background-size: cover; background-position: center;">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h1 class="display-4 fw-bold">${featuredVideo.title}</h1>
+                        <p class="lead">${featuredVideo.description}</p>
+                        <a href="<c:url value='/video/detail?id=${featuredVideo.videoId}'/>" class="btn btn-danger btn-lg">
+                            <i class="fa-solid fa-play"></i> Xem Ngay
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
     </c:if>
 
-    <div class="movie-section">
-        <h3 class="section-title">Danh sách phim mới</h3>
+    <div class="container mb-5">
+        <h3 class="border-start border-4 border-danger ps-2 mb-4">Phim Mới Cập Nhật</h3>
         
-        <div class="row row-cols-2 row-cols-md-4 row-cols-lg-5 g-4">
+        <div class="row row-cols-2 row-cols-md-4 row-cols-lg-5 g-3">
             <c:forEach items="${listVideo}" var="video">
                 <div class="col">
-                    <div class="movie-card">
-                        <c:choose>
-                            <c:when test="${fn:startsWith(video.poster, 'http')}">
-                                <img src="${video.poster}" class="movie-poster" alt="${video.title}">
-                            </c:when>
-                            <c:otherwise>
-                                <img src="<c:url value='/upload/video/${video.poster}'/>" class="movie-poster" alt="${video.title}">
-                            </c:otherwise>
-                        </c:choose>
-
-                        <div class="movie-info">
-                            <div class="movie-title">${video.title}</div>
-                            <div class="movie-meta">
-                                <span><i class="fa-solid fa-eye text-success me-1"></i> ${video.views} lượt xem</span>
-                                <span class="badge-hd">HD</span>
+                    <div class="card h-100 border-0 shadow-sm video-card">
+                        <a href="<c:url value='/video/detail?id=${video.videoId}'/>" class="position-relative">
+                            <c:choose>
+                                <c:when test="${not empty video.poster && video.poster.startsWith('http')}">
+                                    <img src="${video.poster}" class="card-img-top rounded" style="aspect-ratio: 2/3; object-fit: cover;">
+                                </c:when>
+                                <c:otherwise>
+                                    <img src="<c:url value='/upload/video/${video.poster}'/>" class="card-img-top rounded" style="aspect-ratio: 2/3; object-fit: cover;">
+                                </c:otherwise>
+                            </c:choose>
+                            <div class="play-icon text-white position-absolute top-50 start-50 translate-middle" style="opacity: 0.8; display: none;">
+                                <i class="fa-regular fa-circle-play fa-3x"></i>
                             </div>
-                            <div class="mt-2 d-grid">
-                                <a href="#" class="btn btn-sm btn-outline-light rounded-pill">Xem ngay</a>
+                        </a>
+                        
+                        <div class="card-body p-2">
+                            <h6 class="card-title text-truncate mb-1">
+                                <a href="<c:url value='/video/detail?id=${video.videoId}'/>" class="text-decoration-none text-dark fw-bold">
+                                    ${video.title}
+                                </a>
+                            </h6>
+                            <div class="d-flex justify-content-between small text-muted">
+                                <span><i class="fa-solid fa-eye"></i> ${video.views}</span>
+                                <span><i class="fa-solid fa-thumbs-up"></i> Like</span>
                             </div>
                         </div>
                     </div>
@@ -215,10 +61,8 @@
         </div>
     </div>
 
-    <c:if test="${empty featuredVideo && empty listVideo}">
-        <div class="container text-center py-5">
-            <h3 class="text-white">Chưa có bộ phim nào được cập nhật.</h3>
-        </div>
-    </c:if>
-
+    <style>
+        .video-card:hover { transform: translateY(-5px); transition: 0.3s; }
+        .video-card:hover .play-icon { display: block !important; }
+    </style>
 </body>

@@ -52,11 +52,17 @@ public class User implements Serializable{
 
     @Column(name = "active")
     private boolean active;
-
-    // Quan hệ 1-N: User quản lý nhiều Category
-    // mappedBy trỏ tới tên biến 'user' trong class Category
+    
+    // Quan hệ 1-N: User quản lý nhiều Category (nếu logic đề bài yêu cầu User tạo Category)
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Category> categories;
+    
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Favorite> favorites;
+
+    // Quan hệ 1-N: User có nhiều lượt Share
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Share> shares;
 	
 	
 
