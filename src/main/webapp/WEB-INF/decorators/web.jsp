@@ -5,29 +5,38 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><sitemesh:write property="title"/></title>
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f0f2f5;
+        }
+        main {
+            flex: 1;
+            /* Đẩy nội dung xuống để không bị Header che (do header fixed-top) */
+            margin-top: 76px; 
+        }
+    </style>
+    
     <sitemesh:write property="head"/>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container">
-            <a class="navbar-brand" href="#">IoTStar User</a>
-            <div class="collapse navbar-collapse justify-content-end">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="<c:url value='/user/profile'/>">Hồ sơ</a></li>
-                    <li class="nav-item"><a class="nav-link" href="<c:url value='/logout'/>">Đăng xuất</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
 
-    <div class="container mt-4" style="min-height: 80vh;">
+    <jsp:include page="/common/web/header.jsp"></jsp:include>
+
+    <main>
         <sitemesh:write property="body"/>
-    </div>
+    </main>
 
-    <footer class="bg-light text-center py-3 mt-4">
-        <p class="mb-0">© 2025 IoTStar Project</p>
-    </footer>
+    <jsp:include page="/common/web/footer.jsp"></jsp:include>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

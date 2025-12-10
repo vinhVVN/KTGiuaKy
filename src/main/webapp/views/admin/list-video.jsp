@@ -58,4 +58,32 @@
             </c:forEach>
         </tbody>
     </table>
+    <div class="d-flex justify-content-center mt-4">
+        <nav aria-label="Page navigation">
+            <ul class="pagination shadow-sm">
+                
+                <c:if test="${tag > 1}">
+                    <li class="page-item">
+                        <a class="page-link" href="<c:url value='/admin/video/list?index=${tag-1}'/>" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                </c:if>
+
+                <c:forEach begin="1" end="${endPage}" var="i">
+                    <li class="page-item ${tag == i ? 'active' : ''}">
+                        <a class="page-link" href="<c:url value='/admin/video/list?index=${i}'/>">${i}</a>
+                    </li>
+                </c:forEach>
+
+                <c:if test="${tag < endPage}">
+                    <li class="page-item">
+                        <a class="page-link" href="<c:url value='/admin/video/list?index=${tag+1}'/>" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </c:if>
+            </ul>
+        </nav>
+    </div>
 </body>
